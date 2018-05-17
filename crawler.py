@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 
 def getOldestDate():
 	"""
-	function that determine the date limit from the current date
+	function that determine the date limit before from the current date
 	"""
 	oldestYear = time.localtime().tm_year
 	oldestMonth = time.localtime().tm_mon
@@ -29,22 +29,27 @@ def getOldestDate():
 
 
 
-def getNews(keyword, 
+def getRequestedNews(keyword, 
 	currDate = datetime.date(time.localtime().tm_year, time.localtime().tm_mon, time.localtime().tm_mday), 
-	limitDate = getOldestDate()):
+	limitDate = datetime.date(time.localtime().tm_year, time.localtime().tm_mon, time.localtime().tm_mday)):
 	"""
 	request the news given the parameter keyword and return it in a json format
 	keyword is obtained by the tweet
 	currDate is the current date
-	limitDate is the date a week ago from currDate
+	limitDate is the date before from currDate
 
 	both currDate and limitDate can be used to limit the search	
 	"""
-	r = requests.get('https://newsapi.org/v2/everything?q={}&from={}&to={}&sortBy=popularity&apiKey={}'.format(keyword, limitDate, currDate, NEWSAPIKEY)).json()
+	#the search is limited to 5 news titles
+	r = requests.get('https://newsapi.org/v2/everything?q={}&from={}&to={}&pageSize=5&sortBy=popularity&apiKey={}'.format(keyword, limitDate, currDate, NEWSAPIKEY)).json()
 	return json.loads(json.dumps(r))
 
 
-
+def getCryptoPrice():
+	"""
+	Function that gets the current price among other features for a single cryptocurrency
+	"""
+	pass
 
 
 
