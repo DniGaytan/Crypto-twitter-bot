@@ -41,7 +41,7 @@ def getRequestedNews(keyword,
 	both currDate and limitDate can be used to limit the search	
 	"""
 	#the search is limited to 5 news titles
-	r = requests.get('https://newsapi.org/v2/everything?q={}&from={}&to={}&pageSize=5&sortBy=popularity&apiKey={}'.format(keyword, limitDate, currDate, NEWSAPIKEY)).json()
+	r = requests.get('https://newsapi.org/v2/everything?sources=crypto-coins-news&q={}&from={}&to={}&pageSize=5&sortBy=popularity&apiKey={}'.format(keyword, limitDate, currDate, NEWSAPIKEY)).json()
 	return json.loads(json.dumps(r))
 
 
@@ -50,10 +50,6 @@ def getCryptoPrice():
 	Function that gets the current price among other features for a single cryptocurrency
 	"""
 	pass
-
-
-
-
 
 
 
